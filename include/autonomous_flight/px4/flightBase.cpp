@@ -180,6 +180,11 @@ namespace AutoFlight{
 	}
 
 	void flightBase::circle(){
+
+		double center_x = this->odom_.pose.pose.position.x;
+		double center_y = this->odom_.pose.pose.position.y;
+		double center_z = this->odom_.pose.pose.position.z;
+
 		// circle tracking parameters
 		if (not this->nh_.getParam("autonomous_flight/circle_radius", this->radius_)){
 			this->radius_ = 2.0;
@@ -253,8 +258,8 @@ namespace AutoFlight{
             az = 0;
             
             tracking_controller::Target target;
-            target.position.x = x;
-            target.position.y = y;
+            target.position.x = x + center_x;
+            target.position.y = y + center_y;
             target.position.z = z;
             target.velocity.x = vx;
             target.velocity.y = vy;
@@ -311,8 +316,8 @@ namespace AutoFlight{
                 yaw = theta + PI_const / 2;
 
                 tracking_controller::Target target;
-                target.position.x = x;
-                target.position.y = y;
+                target.position.x = x + center_x;
+                target.position.y = y + center_y;
                 target.position.z = z;
                 target.velocity.x = vx;
                 target.velocity.y = vy;
