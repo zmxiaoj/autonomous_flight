@@ -6,7 +6,7 @@
 
 	<rosparam file="$(find autonomous_flight)/cfg/navigation/flight_base_nx.yaml" ns="autonomous_flight"/>
 	<rosparam file="$(find autonomous_flight)/cfg/navigation/planner_param.yaml" />
-	<rosparam file="$(find autonomous_flight)/cfg/navigation/mapping_nx_param.yaml" ns="/occupancy_map" />
+	<rosparam file="$(find autonomous_flight)/cfg/navigation/mapping_nx_camera_param.yaml" ns="/occupancy_map" />
 	<node pkg="autonomous_flight" type="navigation_node" name="navigation_node" output="screen" />
 
 	<!-- Enable/disable options -->
