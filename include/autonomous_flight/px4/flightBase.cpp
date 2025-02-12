@@ -142,16 +142,17 @@ namespace AutoFlight{
 		geometry_msgs::PoseStamped ps;
 		ps.header.frame_id = "map";
 		ps.header.stamp = ros::Time::now();
+		float takeoffHeight = this->odom_.pose.pose.position.z + this->takeoffHgt_;
 		ps.pose.position.x = this->odom_.pose.pose.position.x;
 		ps.pose.position.y = this->odom_.pose.pose.position.y;
-		ps.pose.position.z = this->takeoffHgt_;
+		ps.pose.position.z = takeoffHeight;
 		ps.pose.orientation = this->odom_.pose.pose.orientation;
 		this->updateTarget(ps);
 
 
 		cout << "[AutoFlight]: Start taking off..." << endl;
 		ros::Rate r (30);
-		while (ros::ok() and std::abs(this->odom_.pose.pose.position.z - this->takeoffHgt_) >= 0.1){
+		while (ros::ok() and std::abs(this->odom_.pose.pose.position.z - takeoffHeight) >= 0.1){
 			ros::spinOnce();
 			r.sleep();
 		}
